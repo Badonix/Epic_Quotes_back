@@ -24,7 +24,6 @@ class RegisterRequest extends FormRequest
                 "min:8",
                 "max:15",
                 "confirmed",
-                'regex:/^(?=.*[a-z])(?=.*\d)[a-z\d]+$/',
             ]
         ];
     }
