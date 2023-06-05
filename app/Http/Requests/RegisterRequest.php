@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Response;
 
 class RegisterRequest extends FormRequest
 {
@@ -33,6 +34,6 @@ class RegisterRequest extends FormRequest
             'success' => false,
             'message' => 'Validation errors',
             'data' => $validator->errors()
-        ]));
+        ], Response::HTTP_UNPROCESSABLE_ENTITY));
     }
 }
