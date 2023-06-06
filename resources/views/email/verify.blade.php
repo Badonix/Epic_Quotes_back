@@ -11,15 +11,18 @@
 </head>
 
 <body style='background: #181623; padding-right: 5%;'>
-    <div style="width: 100%; background: #181623; padding-left: 5%; padding-right: 5%; color:white; padding-top:100px;"
+    <div style="width: 100%; background: #181623; padding-left: 5%; padding-right: 5%; color:white; padding-top:20px; padding-bottom:50px;"
         class='body'>
-        <div
-            style="position: absolute;top:20px; left:50%; transform: translateX(-50%); display:flex; justify-content:center; align-items:center; flex-direction:column;">
-            <img style="width: 22px; margin: 0 auto;"
-                src="https://www.linkpicture.com/q/Movie-quotes-Desktop-movie-quotes-Vector.png" />
-            <h1
-                style="font-family: 'Open Sans', sans-serif; margin-top:5px; text-align:center; font-size:12px; color: #DDCCAA; margin: 0 auto;">
-                MOVIE QUOTES</h1>
+        <div style="position: absolute;top:20px; left:50%; transform: translateX(-50%); ">
+            <div style='width:100%; display:flex; justify-content:center; align-items:center;'>
+                <img style="width: 22px; margin: 0 auto;"
+                    src="https://www.linkpicture.com/q/Movie-quotes-Desktop-movie-quotes-Vector.png" />
+            </div>
+            <div style='width:100%; display:flex; justify-content:center; align-items:center; text-align:center;'>
+                <h1
+                    style="font-family: 'Open Sans', sans-serif; width:100%; margin:0 auto; margin-top:5px; text-align:center; font-size:12px; color: #DDCCAA; margin: 0 auto;">
+                    MOVIE QUOTES</h1>
+            </div>
         </div>
         <p style="font-family: 'Open Sans', sans-serif;">Hola {{ $username }}!</p>
         <p style="font-family: 'Open Sans', sans-serif;">Thanks for joining Movie quotes! We really appreciate it.
