@@ -8,7 +8,9 @@ class EmailVerificationController extends Controller
 {
     public function verify(EmailVerificationRequest $request){
             $request->fulfill();
-        
-            return redirect("http://localhost:3000/verification-success");
+            $spaDomain = env("SPA_DOMAIN");
+            $successRoute = '/verification-success';
+            $redirectTo = $spaDomain . $successRoute;
+            return redirect($redirectTo);
     }
 }
