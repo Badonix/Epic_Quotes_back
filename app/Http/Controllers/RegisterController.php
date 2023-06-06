@@ -17,8 +17,6 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password)
         ]);
         $user->sendEmailVerificationNotification();
-        auth()->login($user);
-
         return response()->json([
             'message' => 'User registered successfully',
             'user' => $user,
