@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
@@ -16,6 +16,9 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
+        $user->sendEmailVerificationNotification();
+        auth()->login($user);
+
         return response()->json([
             'message' => 'User registered successfully',
             'user' => $user,
