@@ -2,10 +2,9 @@
 
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
-use App\Http\Requests\Auth\EmailVerificationRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +22,7 @@ Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 've
 Route::middleware('auth:sanctum')->get('/me', [UserController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
 Route::post('/login', [LoginController::class , 'authenticate']);
+Route::post('/forgot-password', [PasswordResetController::class, 'send']);
+Route::get('/reset-password/{token}', [PasswordResetController::class, 'index'])->name('password.reset');
+
+Route::post('/reset-password', [PasswordResetController::class, 'reset'])->middleware('guest')->name('password.update');
