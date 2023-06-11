@@ -20,19 +20,16 @@ class GoogleAuthController extends Controller
         ], [
             'username' => $googleUser->name,
             'email' => $googleUser->email,
-            "email_verified_at" => now(),
-            'google_token' => $googleUser->token,
-            'google_refresh_token' => $googleUser->refreshToken,
+            'email_verified_at' => now(),
         ]);
 
         auth()->login($user);
 
         session()->regenerate();
 
-        // $spaDomain = env("SPA_DOMAIN");
         return response()->json($user)->withHeaders([
-            'Access-Control-Allow-Credentials' => 'true', // Enable CORS credentials
-            'Access-Control-Allow-Origin' => env('SPA_DOMAIN'), // Replace with your SPA domain
-        ])->withCookie(cookie('XSRF-TOKEN', csrf_token())); // Attach the CSRF token cookie
+            'Access-Control-Allow-Credentials' => 'true',
+            'Access-Control-Allow-Origin' => env('SPA_DOMAIN'),
+        ])->withCookie(cookie('XSRF-TOKEN', csrf_token()));
     }
 }
