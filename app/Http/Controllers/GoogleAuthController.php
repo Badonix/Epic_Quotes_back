@@ -25,6 +25,6 @@ class GoogleAuthController extends Controller
 
         auth()->login($user);
         session()->regenerate();
-        return response()->json($user);
+        return response(['user' => auth()->user()]);
     }
 }
