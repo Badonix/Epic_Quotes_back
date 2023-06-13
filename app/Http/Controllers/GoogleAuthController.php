@@ -24,12 +24,7 @@ class GoogleAuthController extends Controller
         ]);
 
         auth()->login($user);
-
         session()->regenerate();
-
-        return response()->json($user)->withHeaders([
-            'Access-Control-Allow-Credentials' => 'true',
-            'Access-Control-Allow-Origin' => env('SPA_DOMAIN'),
-        ])->withCookie(cookie('XSRF-TOKEN', csrf_token()));
+        return response()->json($user);
     }
 }
