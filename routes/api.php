@@ -33,3 +33,6 @@ Route::post('/auth/callback', [GoogleAuthController::class, 'callback']);
 Route::post('/reset-password', [PasswordResetController::class, 'reset'])->middleware('guest')->name('password.update');
 
 Route::post('/movies', [MovieController::class, 'store']);
+Route::get('/movies', [MovieController::class, 'view']);
+Route::delete('/movies/{movie}', [MovieController::class, 'destroy']);
+Route::post('/movies/{movie}/edit', [MovieController::class, 'edit']);

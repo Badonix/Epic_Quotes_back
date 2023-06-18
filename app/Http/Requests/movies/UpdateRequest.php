@@ -8,19 +8,19 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Rule;
 
-class CreateRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * Determine if the user is authorized to make this request.
      */
     public function rules(): array
     {
+        $movieId = $this->route('movie')->id;
+
         return [
             'title' => [
                 'required',
-                Rule::unique('movies', 'title')
+                Rule::unique('movies', 'title')->ignore($movieId),
             ],
             'banner' => 'required|image',
             'release_year' => "required",
