@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\movies\CreateRequest;
 use App\Http\Requests\movies\UpdateRequest;
 use App\Models\Movie;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
@@ -31,7 +29,7 @@ class MovieController extends Controller
 
     public function view()
     {
-        $movies = Movie::all();
+        $movies = Movie::orderBy('created_at', 'desc')->get();
         return response($movies, 200);
     }
 
