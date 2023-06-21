@@ -23,7 +23,7 @@ class MovieController extends Controller
             'genre' => $validatedData['genre'],
             'description' => $validatedData['description'],
             'director' => $validatedData['director'],
-            'budget' => $validatedData['budget'],
+            'budget'=> $validatedData['budget']
         ]);
 
         return response($movie, 201);
@@ -52,7 +52,7 @@ class MovieController extends Controller
             'genre' => $attributes['genre'],
             'description' => $attributes['description'],
             'director' => $attributes['director'],
-            'budget' => $attributes['budget'],
+            'budget'=> $attributes['budget']
         ]);
 
         return response($movie);

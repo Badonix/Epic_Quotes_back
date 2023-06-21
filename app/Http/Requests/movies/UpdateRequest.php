@@ -27,7 +27,6 @@ class UpdateRequest extends FormRequest
             'genre' => "required",
             "description" => "required",
             'director' => "required",
-            'budget' => "required"
         ];
     }
 

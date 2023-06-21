@@ -29,7 +29,7 @@ class CreateRequest extends FormRequest
             'director' => "required",
             'budget' => "required"
         ];
-    }
+    }   
 
 
     protected function failedValidation(Validator $validator)
