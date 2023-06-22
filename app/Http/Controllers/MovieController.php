@@ -12,7 +12,7 @@ class MovieController extends Controller
     {
         return isset($movie) ? response($movie) : response("Movie not found", 404);
     }
-    
+
     public function store(CreateRequest $request)
     {
         $validatedData = $request->validated();
@@ -47,18 +47,24 @@ class MovieController extends Controller
     public function edit(UpdateRequest $request, Movie $movie)
     {
         $attributes = $request->validated();
-        $bannerPath = $request->file('banner')->store('banners', 'public');
+        if ($request->hasFile('banner')) {
+            $bannerPath = $request->file('banner')->store('banners', 'public');
+            $movie->update([
+                'banner' => $bannerPath,
+            ]);
+        }
+
         $movie->update([
             'title' => $attributes['title'],
-            'banner' => $bannerPath,
             'release_year' => $attributes['release_year'],
             'genre' => $attributes['genre'],
             'description' => $attributes['description'],
             'director' => $attributes['director'],
-            'budget'=> $attributes['budget']
+            'budget' => $attributes['budget']
         ]);
 
         return response($movie);
     }
+
 
 }
