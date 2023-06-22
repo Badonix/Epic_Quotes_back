@@ -36,3 +36,4 @@ Route::post('/movies', [MovieController::class, 'store']);
 Route::get('/movies', [MovieController::class, 'view']);
 Route::delete('/movies/{movie}', [MovieController::class, 'destroy']);
 Route::post('/movies/{movie}/edit', [MovieController::class, 'edit']);
+Route::get('/movies/{movie}', [MovieController::class, 'index']);

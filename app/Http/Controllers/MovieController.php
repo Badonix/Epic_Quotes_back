@@ -8,6 +8,11 @@ use App\Models\Movie;
 
 class MovieController extends Controller
 {
+    public function index(Movie $movie)
+    {
+        return isset($movie) ? response($movie) : response("Movie not found", 404);
+    }
+    
     public function store(CreateRequest $request)
     {
         $validatedData = $request->validated();
