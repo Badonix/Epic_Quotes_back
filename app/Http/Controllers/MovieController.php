@@ -12,6 +12,7 @@ class MovieController extends Controller
     {
         return isset($movie) ? response($movie) : response("Movie not found", 404);
     }
+    
 
     public function store(CreateRequest $request)
     {
@@ -65,6 +66,4 @@ class MovieController extends Controller
 
         return response($movie);
     }
-
-
 }
