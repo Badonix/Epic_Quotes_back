@@ -10,9 +10,6 @@ class MovieController extends Controller
 {
     public function index(Movie $movie)
     {
-        $movie->director = json_decode($movie->director);
-        $movie->title = json_decode($movie->title);
-        $movie->description = json_decode($movie->description);
         return isset($movie) ? response($movie) : response("Movie not found", 404);
     }
     
