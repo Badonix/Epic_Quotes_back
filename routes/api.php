@@ -3,6 +3,7 @@
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
@@ -30,3 +31,13 @@ Route::get('/auth/redirect', [GoogleAuthController::class, 'redirect']);
 Route::post('/auth/callback', [GoogleAuthController::class, 'callback']);
 
 Route::post('/reset-password', [PasswordResetController::class, 'reset'])->middleware('guest')->name('password.update');
+
+Route::group(['prefix' => "movies"], function () {
+    Route::controller(MovieController::class)->group(function () {
+        Route::post('/', 'store');
+        Route::get('/', 'view');
+        Route::delete('/{movie}', 'destroy');
+        Route::post('/{movie}/edit', 'edit');
+        Route::get('/{movie}', 'index');
+    });
+});
