@@ -32,8 +32,12 @@ Route::post('/auth/callback', [GoogleAuthController::class, 'callback']);
 
 Route::post('/reset-password', [PasswordResetController::class, 'reset'])->middleware('guest')->name('password.update');
 
-Route::post('/movies', [MovieController::class, 'store']);
-Route::get('/movies', [MovieController::class, 'view']);
-Route::delete('/movies/{movie}', [MovieController::class, 'destroy']);
-Route::post('/movies/{movie}/edit', [MovieController::class, 'edit']);
-Route::get('/movies/{movie}', [MovieController::class, 'index']);
+Route::group(['prefix' => "movies"], function () {
+    Route::controller(MovieController::class)->group(function () {
+        Route::post('/', 'store');
+        Route::get('/', 'view');
+        Route::delete('/{movie}', 'destroy');
+        Route::post('/{movie}/edit', 'edit');
+        Route::get('/{movie}', 'index');
+    });
+});
