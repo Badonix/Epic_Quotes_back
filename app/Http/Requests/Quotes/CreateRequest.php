@@ -18,8 +18,9 @@ class CreateRequest extends FormRequest
     {
         return [
             "body" => "required",
-            "image" => "required",
+            "image" => "required|image",
             'movie_id' => "required|exists:movies,id",
+            'user_id' => "required|exists:users,id"
         ];
     }
 

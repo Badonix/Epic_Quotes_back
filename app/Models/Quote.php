@@ -10,7 +10,6 @@ class Quote extends Model
     use HasFactory;
     protected $fillable = ['body', 'image', 'user_id', 'movie_id'];
     protected $casts = ["body" => "array"];
-    
     public function user(){
         return $this->belongsTo(User::class);
     }

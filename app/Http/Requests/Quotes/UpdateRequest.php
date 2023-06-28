@@ -16,8 +16,9 @@ class UpdateRequest extends FormRequest
     {
         return [
             "body" => "required",
-            "image" => "nullable",
+            "image" => "",
             'movie_id' => "required|exists:movies,id",
+            'user_id' => "required|exists:users,id"
         ];
     }
 

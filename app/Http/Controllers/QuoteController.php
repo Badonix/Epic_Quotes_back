@@ -8,57 +8,50 @@ use App\Models\Quote;
 
 class QuoteController extends Controller
 {
+
     public function store(CreateRequest $request)
     {
         $validatedData = $request->validated();
-        $imagePath = $request->file('image')->store('images', 'public');
-
+        $bannerPath = $request->file('image')->store('images', 'public');
+    
         $quote = Quote::create([
-            'body' => $validatedData['body'],
-            'image' => $imagePath,
+            'body' => json_encode($validatedData['body']),
+            'image' => $bannerPath,
             'movie_id' => $validatedData['movie_id'],
-            'user_id' => $request->user()->id
+            'user_id' => $validatedData['user_id']
         ]);
-
+    
         return response($quote, 201);
     }
-    public function view()
-    {
-        $quotes = Quote::with(['movie', 'user'])
-            ->orderBy('created_at', 'desc')
-            ->get();
-
+    public function view(){
+        $quotes = Quote::orderBy('created_at', 'desc')->get();
         return response($quotes);
     }
 
-    public function destroy(Quote $quote)
-    {
+    public function destroy(Quote $quote){
         $quote->delete();
         return response()->json(['message' => 'Quote deleted successfully'], 200);
     }
 
-    public function edit(Quote $quote, UpdateRequest $request)
-    {
-
+    public function edit(Quote $quote, UpdateRequest $request){
         $attributes = $request->validated();
         if ($request->hasFile('image')) {
-            $quotePath = $request->file('image')->store('images', 'public');
+            $bannerPath = $request->file('image')->store('images', 'public');
             $quote->update([
-                'image' => $quotePath,
+                'banner' => $bannerPath,
             ]);
         }
 
         $quote->update([
             'body' => $attributes['body'],
             'movie_id' => $attributes['movie_id'],
-            'user_id' => $request->user()->id
+            'user_id' => $attributes['user_id']
         ]);
 
         return response($quote);
     }
 
-    public function index(Quote $quote)
-    {
-        return isset($quote) ? response($quote->load('user')) : response("Quote not found", 404);
-    }
+    public function index(Quote $quote){
+        return isset($quote) ? response($quote) : response("Quote not found", 404);
+    }    
 }

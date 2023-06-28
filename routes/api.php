@@ -50,6 +50,6 @@ Route::group(['prefix' => "quotes"], function(){
         Route::get('/', 'view');
         Route::delete('/{quote}', 'destroy');
         Route::post('/{quote}/edit', 'edit');
-        Route::get('/{quote}', 'index');
+        route::get('/{quote}', 'index');
     });
 });
