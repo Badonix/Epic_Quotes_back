@@ -33,6 +33,7 @@ Route::post('/auth/callback', [GoogleAuthController::class, 'callback']);
 
 Route::post('/reset-password', [PasswordResetController::class, 'reset'])->middleware('guest')->name('password.update');
 
+
 Route::group(['prefix' => "movies"], function () {
     Route::controller(MovieController::class)->group(function () {
         Route::post('/', 'store');

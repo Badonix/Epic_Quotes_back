@@ -12,19 +12,19 @@ class QuoteController extends Controller
     public function store(CreateRequest $request)
     {
         $validatedData = $request->validated();
-        $bannerPath = $request->file('image')->store('images', 'public');
+        $imagePath = $request->file('image')->store('images', 'public');
     
         $quote = Quote::create([
-            'body' => json_encode($validatedData['body']),
-            'image' => $bannerPath,
+            'body' => $validatedData['body'],
+            'image' => $imagePath,
             'movie_id' => $validatedData['movie_id'],
-            'user_id' => $validatedData['user_id']
+            'user_id' => $request->user()->id
         ]);
     
         return response($quote, 201);
     }
     public function view(){
-        $quotes = Quote::orderBy('created_at', 'desc')->get();
+        $quotes = Quote::with(['movie', 'user'])->orderBy('created_at', 'desc')->get();
         return response($quotes);
     }
 
@@ -36,16 +36,16 @@ class QuoteController extends Controller
     public function edit(Quote $quote, UpdateRequest $request){
         $attributes = $request->validated();
         if ($request->hasFile('image')) {
-            $bannerPath = $request->file('image')->store('images', 'public');
+            $imagePath = $request->file('image')->store('images', 'public');
             $quote->update([
-                'banner' => $bannerPath,
+                'image' => $imagePath,
             ]);
         }
 
         $quote->update([
             'body' => $attributes['body'],
             'movie_id' => $attributes['movie_id'],
-            'user_id' => $attributes['user_id']
+            'user_id' => $request->user()->id
         ]);
 
         return response($quote);
