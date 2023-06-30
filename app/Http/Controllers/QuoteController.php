@@ -39,11 +39,12 @@ class QuoteController extends Controller
 
     public function edit(Quote $quote, UpdateRequest $request)
     {
+
         $attributes = $request->validated();
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public');
+            $quotePath = $request->file('image')->store('images', 'public');
             $quote->update([
-                'image' => $imagePath,
+                'image' => $quotePath,
             ]);
         }
 
