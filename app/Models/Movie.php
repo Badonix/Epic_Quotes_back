@@ -10,4 +10,9 @@ class Movie extends Model
     use HasFactory;
     protected $guarded = [];
     protected $casts = ["title" => "array", "description" => "array", "director" => "array"];
+
+    public function quotes(){
+        return $this->hasMany(Quote::class, "movie_id");
+    }
+
 }
