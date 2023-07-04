@@ -14,7 +14,8 @@ class RegisterController extends Controller
         $user = User::create([
             'username' => $request->username,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'avatar' => 'avatars/default.png'
         ]);
         $user->sendEmailVerificationNotification();
         return response()->json([

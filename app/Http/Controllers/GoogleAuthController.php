@@ -21,6 +21,7 @@ class GoogleAuthController extends Controller
             'username' => $googleUser->name,
             'email' => $googleUser->email,
             'email_verified_at' => now(),
+            'avatar' => 'avatars/default.png'
         ]);
 
         auth()->login($user);

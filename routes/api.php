@@ -53,3 +53,5 @@ Route::group(['prefix' => "quotes"], function(){
         Route::get('/{quote}', 'index');
     });
 });
+
+Route::post('/profile', [UserController::class, 'update']);
