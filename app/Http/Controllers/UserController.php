@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\UpdateRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -31,8 +32,9 @@ class UserController extends Controller
                 $user->password = Hash::make($request->input('password'));
             }
             $user->save();        
-    
-            return response()->json(['message' => 'Profile updated successfully']);
+            $updatedUser = User::find($user->id);
+
+            return response()->json(['message' => 'Profile updated successfully', 'user' => $updatedUser]);
         }
     }
 }
