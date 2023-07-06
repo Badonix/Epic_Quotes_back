@@ -11,10 +11,7 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            {
-                $table->string('google_id')->unique()->nullable();
-                $table->string('password')->nullable()->change();
-            }
+            $table->string('avatar')->nullable();
         });
     }
 
