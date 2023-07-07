@@ -20,13 +20,13 @@ class QuoteController extends Controller
             'user_id' => $request->user()->id
         ]);
 
-        return response($quote, 201);
+        return response()->json($quote->load('user', 'movie'), 201);
     }
     public function view()
     {
         $quotes = Quote::with(['movie', 'user'])
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(5);
 
         return response($quotes);
     }
