@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\LoginController;
@@ -52,6 +53,11 @@ Route::group(['prefix' => "quotes"], function(){
         Route::post('/{quote}/edit', 'edit');
         Route::get('/{quote}', 'index');
     });
+});
+
+Route::group(['prefix' => "comments"], function(){
+    Route::get('/', [CommentController::class, 'view']);
+    Route::post('/', [CommentController::class, 'store']);
 });
 
 Route::post('/profile', [UserController::class, 'update']);
