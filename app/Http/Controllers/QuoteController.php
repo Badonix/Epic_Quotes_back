@@ -60,6 +60,6 @@ class QuoteController extends Controller
 
     public function index(Quote $quote)
     {
-        return isset($quote) ? response($quote->load('user')) : response("Quote not found", 404);
+        return isset($quote) ? response($quote->load(['user', 'comments'])) : response("Quote not found", 404);
     }
 }

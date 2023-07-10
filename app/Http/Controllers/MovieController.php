@@ -10,7 +10,7 @@ class MovieController extends Controller
 {
     public function index(Movie $movie)
     {
-        $movieWithQuotes = Movie::with('quotes')->find($movie->id);
+        $movieWithQuotes = Movie::with(['quotes.comments.user'])->find($movie->id);
         return isset($movieWithQuotes) ? response($movieWithQuotes) : response("Movie not found", 404);
     }
     
