@@ -24,10 +24,11 @@ class QuoteController extends Controller
     }
     public function view()
     {
-        $quotes = Quote::with(['movie', 'user', 'comments.user'])
-            ->orderBy('created_at', 'desc')
-            ->paginate(5);
-
+        $quotes = Quote::with(['movie', 'user', 'comments' => function ($query) {
+            $query->with('user')->latest();
+        }])
+        ->orderBy('created_at', 'desc')
+        ->paginate(5);
         return response($quotes);
     }
 
