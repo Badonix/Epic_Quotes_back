@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PasswordResetController;
@@ -45,8 +46,8 @@ Route::group(['prefix' => "movies"], function () {
     });
 });
 
-Route::group(['prefix' => "quotes"], function(){
-    Route::controller(QuoteController::class)->group(function(){
+Route::group(['prefix' => "quotes"], function () {
+    Route::controller(QuoteController::class)->group(function () {
         Route::post('/', 'store');
         Route::get('/', 'view');
         Route::delete('/{quote}', 'destroy');
@@ -55,9 +56,11 @@ Route::group(['prefix' => "quotes"], function(){
     });
 });
 
-Route::group(['prefix' => "comments"], function(){
+Route::group(['prefix' => "comments"], function () {
     Route::get('/', [CommentController::class, 'view']);
     Route::post('/', [CommentController::class, 'store']);
 });
+Route::post('/like/{quote}', [LikeController::class, 'like']);
+Route::post('/unlike/{quote}', [LikeController::class, 'unlike']);
 
 Route::post('/profile', [UserController::class, 'update']);
