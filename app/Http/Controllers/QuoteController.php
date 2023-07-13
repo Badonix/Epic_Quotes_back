@@ -24,7 +24,7 @@ class QuoteController extends Controller
     }
     public function view()
     {
-        $quotes = Quote::with(['movie', 'user', 'comments' => function ($query) {
+        $quotes = Quote::with(['movie','likes', 'user', 'comments' => function ($query) {
             $query->with('user')->latest();
         }])
         ->orderBy('created_at', 'desc')

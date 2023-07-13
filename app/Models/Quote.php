@@ -20,4 +20,7 @@ class Quote extends Model
     public function comments(){
         return $this->hasMany(Comment::class, "post_id");
     }
+    public function likes(){
+        return $this->hasMany(Like::class, 'quote_id');
+    }
 }
