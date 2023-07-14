@@ -20,7 +20,7 @@ class QuoteController extends Controller
             'user_id' => $request->user()->id
         ]);
 
-        return response()->json($quote->load('user', 'movie'), 201);
+        return response()->json($quote->load('user', 'movie', 'comments', 'likes'), 201);
     }
     public function view()
     {

@@ -36,7 +36,7 @@ class MovieController extends Controller
 
     public function view()
     {
-        $movies = Movie::orderBy('created_at', 'desc')->get();
+        $movies = Movie::with('quotes')->orderBy('created_at', 'desc')->get();
         return response($movies, 200);
     }
 
