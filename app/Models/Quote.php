@@ -43,8 +43,7 @@ class Quote extends Model
     public function scopeSearch($query, $searchText)
     {
         return $query->whereHas('movie', function ($query) use ($searchText) {
-            $query->where('title->en', 'like', '%' . $searchText . '%')
-                ->orWhere('title->ka', 'like', '%' . $searchText . '%');
+            $query->searchByTitle($searchText);
         })
         ->orWhere('body->en', 'like', '%' . $searchText . '%')
         ->orWhere('body->ka', 'like', '%' . $searchText . '%');
