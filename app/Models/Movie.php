@@ -15,4 +15,11 @@ class Movie extends Model
         return $this->hasMany(Quote::class, "movie_id");
     }
 
+    public function scopeSearchByTitle($query, $searchText)
+    {
+        return $query->where('title->en', 'like', '%' . $searchText . '%')
+            ->orWhere('title->ka', 'like', '%' . $searchText . '%');
+    }
+    
+
 }
