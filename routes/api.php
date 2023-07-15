@@ -9,6 +9,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -63,4 +64,10 @@ Route::group(['prefix' => "comments"], function () {
 Route::post('/like/{quote}', [LikeController::class, 'like']);
 Route::post('/unlike/{quote}', [LikeController::class, 'unlike']);
 
+Route::group(['prefix'=>"search"], function(){
+    Route::controller(SearchController::class)->group(function(){
+        Route::post('/', "search");
+        Route::post('/movies', 'movies');
+    });
+});
 Route::post('/profile', [UserController::class, 'update']);
