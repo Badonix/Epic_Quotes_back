@@ -14,22 +14,12 @@ class SearchController extends Controller
         $searchText = $request['search'];
         if (Str::startsWith($searchText, '@')) {
             $movieName = Str::substr($searchText, 1);
-            $quotes = Quote::whereHas('movie', function ($query) use ($movieName) {
-                $query->where('title->en', 'like', '%' . $movieName . '%')
-                      ->orWhere('title->ka', 'like', '%' . $movieName . '%');
-            })->get();
+            $quotes = Quote::searchByTitle($movieName)->get();
         } elseif (Str::startsWith($searchText, '#')) {
             $quoteBody = Str::substr($searchText, 1);
-            $quotes = Quote::where('body->en', 'like', '%' . $quoteBody . '%')
-                          ->orWhere('body->ka', 'like', '%' . $quoteBody . '%')
-                          ->get();
-        }else {
-            $quotes = Quote::whereHas('movie', function ($query) use ($searchText) {
-                $query->where('title->en', 'like', '%' . $searchText . '%')
-                      ->orWhere('title->ka', 'like', '%' . $searchText . '%');
-            })->orWhere('body->en', 'like', '%' . $searchText . '%')
-              ->orWhere('body->ka', 'like', '%' . $searchText . '%')
-              ->get();
+            $quotes = Quote::searchByBody($quoteBody)->get();
+        } else {
+            $quotes = Quote::search($searchText)->get();
         }
         return response($quotes->load('movie', 'user', 'likes', 'comments.user'));
     }
@@ -38,10 +28,7 @@ class SearchController extends Controller
     {
         $movieName = $request['search'];
     
-        $movies = Movie::where(function ($query) use ($movieName) {
-            $query->where('title->en', 'like', '%' . $movieName . '%')
-                  ->orWhere('title->ka', 'like', '%' . $movieName . '%');
-        })->get();
+        $movies = Movie::searchByTitle($movieName)->get();
     
         return response($movies);
     }
