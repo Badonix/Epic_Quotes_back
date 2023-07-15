@@ -37,37 +37,40 @@ Route::post('/auth/callback', [GoogleAuthController::class, 'callback']);
 Route::post('/reset-password', [PasswordResetController::class, 'reset'])->middleware('guest')->name('password.update');
 
 
-Route::group(['prefix' => "movies"], function () {
-    Route::controller(MovieController::class)->group(function () {
-        Route::post('/', 'store');
-        Route::get('/', 'view');
-        Route::delete('/{movie}', 'destroy');
-        Route::post('/{movie}/edit', 'edit');
-        Route::get('/{movie}', 'index');
-    });
-});
+Route::group(["middleware"=>"auth:sanctum"], function () {
 
-Route::group(['prefix' => "quotes"], function () {
-    Route::controller(QuoteController::class)->group(function () {
-        Route::post('/', 'store');
-        Route::get('/', 'view');
-        Route::delete('/{quote}', 'destroy');
-        Route::post('/{quote}/edit', 'edit');
-        Route::get('/{quote}', 'index');
+    Route::group(['prefix' => "movies"], function () {
+        Route::controller(MovieController::class)->group(function () {
+            Route::post('/', 'store');
+            Route::get('/', 'view');
+            Route::delete('/{movie}', 'destroy');
+            Route::post('/{movie}/edit', 'edit');
+            Route::get('/{movie}', 'index');
+        });
     });
-});
 
-Route::group(['prefix' => "comments"], function () {
-    Route::get('/', [CommentController::class, 'view']);
-    Route::post('/', [CommentController::class, 'store']);
-});
-Route::post('/like/{quote}', [LikeController::class, 'like']);
-Route::post('/unlike/{quote}', [LikeController::class, 'unlike']);
-
-Route::group(['prefix'=>"search"], function(){
-    Route::controller(SearchController::class)->group(function(){
-        Route::post('/', "search");
-        Route::post('/movies', 'movies');
+    Route::group(['prefix' => "quotes"], function () {
+        Route::controller(QuoteController::class)->group(function () {
+            Route::post('/', 'store');
+            Route::get('/', 'view');
+            Route::delete('/{quote}', 'destroy');
+            Route::post('/{quote}/edit', 'edit');
+            Route::get('/{quote}', 'index');
+        });
     });
+
+    Route::group(['prefix' => "comments"], function () {
+        Route::get('/', [CommentController::class, 'view']);
+        Route::post('/', [CommentController::class, 'store']);
+    });
+    Route::post('/like/{quote}', [LikeController::class, 'like']);
+    Route::post('/unlike/{quote}', [LikeController::class, 'unlike']);
+
+    Route::group(['prefix'=>"search"], function () {
+        Route::controller(SearchController::class)->group(function () {
+            Route::post('/', "search");
+            Route::post('/movies', 'movies');
+        });
+    });
+    Route::post('/profile', [UserController::class, 'update']);
 });
-Route::post('/profile', [UserController::class, 'update']);
