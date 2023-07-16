@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index(Request $request) {
-        return $request->user();
+        return $request->user()->load("notifications.sender");
     }
 
     public function update(UpdateRequest $request){
