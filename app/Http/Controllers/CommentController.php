@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NotificationCreated;
+use App\Events\PostCommented;
 use App\Http\Requests\PostCommentRequest;
 use App\Models\Comment;
 use App\Models\Notification;
@@ -29,7 +31,9 @@ class CommentController extends Controller
                 'sender_id' => $request->user()->id,
                 'type' => 'comment',
             ]);
+            event(new NotificationCreated($notification->load("sender")));
         }
+        event(new PostCommented($post->id, $comment->load('user')));
         return response($comment->load('user'));
     }
 }
