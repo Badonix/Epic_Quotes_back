@@ -9,21 +9,29 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index(Request $request) {
-        return $request->user();
+    public function index(Request $request)
+    {
+        $user = $request->user();
+        $user->load(['notifications' => function ($query) {
+            $query->orderByDesc('created_at');
+        }, 'notifications.sender']);
+
+        return $user;
+
     }
 
-    public function update(UpdateRequest $request){
+    public function update(UpdateRequest $request)
+    {
         $attributes = $request->validated();
         {
             $user = $request->user();
-    
-            if($request->filled('username')){
+
+            if($request->filled('username')) {
                 $user->update($request->only('username'));
             }
-            if($request->filled('email')){
+            if($request->filled('email')) {
                 $user->update($request->only('email'));
-            }    
+            }
             if ($request->hasFile('avatar')) {
                 $avatarPath = $request->file('avatar')->store('avatars', 'public');
                 $user->avatar = $avatarPath;
@@ -31,7 +39,7 @@ class UserController extends Controller
             if ($request->filled('password')) {
                 $user->password = Hash::make($request->input('password'));
             }
-            $user->save();        
+            $user->save();
             $updatedUser = User::find($user->id);
 
             return response()->json(['message' => 'Profile updated successfully', 'user' => $updatedUser]);

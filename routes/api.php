@@ -6,6 +6,7 @@ use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\RegisterController;
@@ -73,4 +74,6 @@ Route::group(["middleware"=>"auth:sanctum"], function () {
         });
     });
     Route::post('/profile', [UserController::class, 'update']);
+    Route::post('/notifications/clear', [NotificationController::class, 'clear']);
+    Route::post('/notifications/{notification}', [NotificationController::class, 'view']);
 });

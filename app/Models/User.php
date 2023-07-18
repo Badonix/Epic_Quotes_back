@@ -27,6 +27,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function likes(){
         return $this->hasMany(Likes::class, 'quote_id');
     }
+    public function notifications(){
+        return $this->hasMany(Notification::class, "receiver_id");
+    }
 
     protected $fillable = [
         'username',
