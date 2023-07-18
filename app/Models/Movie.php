@@ -9,10 +9,15 @@ class Movie extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $casts = ["title" => "array", "description" => "array", "director" => "array"];
+    protected $casts = ["title" => "array", "description" => "array", "director" => "array", "genre"=>"array"];
 
-    public function quotes(){
+    public function quotes()
+    {
         return $this->hasMany(Quote::class, "movie_id");
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function scopeSearchByTitle($query, $searchText)
@@ -20,6 +25,6 @@ class Movie extends Model
         return $query->where('title->en', 'like', '%' . $searchText . '%')
             ->orWhere('title->ka', 'like', '%' . $searchText . '%');
     }
-    
+
 
 }

@@ -30,7 +30,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function notifications(){
         return $this->hasMany(Notification::class, "receiver_id");
     }
-
+    public function movies(){
+        return $this->hasMany(Movie::class, "user_id");
+    }
     protected $fillable = [
         'username',
         'email',

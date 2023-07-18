@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\movies\CreateRequest;
 use App\Http\Requests\movies\UpdateRequest;
 use App\Models\Movie;
+use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
@@ -18,27 +19,33 @@ class MovieController extends Controller
     public function store(CreateRequest $request)
     {
         $validatedData = $request->validated();
-
         $bannerPath = $request->file('banner')->store('banners', 'public');
 
         $movie = Movie::create([
             'title' => $validatedData['title'],
             'banner' => $bannerPath,
             'release_year' => $validatedData['release_year'],
-            'genre' => $validatedData['genre'],
+            'genre' => json_encode($validatedData['genre']),
             'description' => $validatedData['description'],
             'director' => $validatedData['director'],
-            'budget'=> $validatedData['budget']
+            'budget'=> $validatedData['budget'],
+            "user_id"=>$request->user()->id
         ]);
 
         return response($movie, 201);
     }
 
-    public function view()
+    public function view(Request $request)
     {
-        $movies = Movie::with('quotes')->orderBy('created_at', 'desc')->get();
+        $movies = $request->user()->movies;
+    
+        if ($movies->isEmpty()) {
+            return response([], 200);
+        }
+    
         return response($movies, 200);
     }
+    
 
     public function destroy(Movie $movie)
     {
