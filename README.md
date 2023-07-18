@@ -1,66 +1,191 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div style="display:flex; align-items: center">
+  <h1 style="position:relative; top: -6px">Movie Quotes App</h1>
+</div>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+This **Epic Movie Quotes** backend API is for social media app about movies and its quotes. This app allows users to post movies and quotes, like or comment each others quotes and send notifications.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+#
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Table of Contents
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- [Prerequisites](#prerequisites)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Migrations](#migration)
+- [Development](#development)
+- [Resources](#resources)
 
-## Learning Laravel
+#
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Prerequisites
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- <img src="readme/assets/php.svg" width="35" style="position: relative; top: 4px" /> *PHP@7.2 and up*
+- <img src="readme/assets/mysql.png" width="35" style="position: relative; top: 4px" /> _MYSQL@8 and up_
+- <img src="readme/assets/npm.png" width="35" style="position: relative; top: 4px" /> _npm@6 and up_
+- <img src="readme/assets/composer.png" width="35" style="position: relative; top: 6px" /> _composer@2 and up_
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+#
 
-## Laravel Sponsors
+### Tech Stack
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- <img src="readme/assets/laravel.png" height="18" style="position: relative; top: 4px" /> [Laravel@10.x](https://laravel.com/docs/10.x) - back-end framework
 
-### Premium Partners
+#
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### Getting Started
 
-## Contributing
+1\. First of all you need to clone Epic Movie Quotes API repository from github:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```sh
+git clone https://github.com/RedberryInternshipnikoloz-danelia-epic-movie-quotes-back
+```
 
-## Code of Conduct
+2\. Next step requires you to run _composer install_ in order to install all the dependencies.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```sh
+composer install
+```
 
-## Security Vulnerabilities
+3\. after you have installed all the PHP dependencies, it's time to install all the JS dependencies:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```sh
+npm install
+```
 
-## License
+and also:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```sh
+npm run dev
+```
+
+in order to build your JS/SaaS resources.
+
+4\. Now we need to set our env file. Go to the root of your project and execute this command.
+
+```sh
+cp .env.example .env
+```
+
+And now you should provide **.env** file all the necessary environment variables:
+
+#
+
+**MYSQL:**
+
+> DB_CONNECTION=mysql
+
+> DB_HOST=127.0.0.1
+
+> DB_PORT=3306
+
+> DB_DATABASE=**\***
+
+> DB_USERNAME=**\***
+
+> DB_PASSWORD=**\***
+
+**DOMAINS:**
+
+> SANCTUM_STATEFUL_DOMAINS=localhost:3000
+
+> SPA_DOMAIN=http://localhost:3000
+
+> SESSION_DOMAIN=localhost
+
+**GOOGLE:**
+
+> GOOGLE_CLIENT_SECRET=null
+
+> GOOGLE_CLIENT_ID=null
+
+> GOOGLE_CALLBACK_REDIRECT=null
+
+**MAIL**
+
+> MAIL_DRIVER=smtp
+
+> MAIL_HOST=smtp.gmail.com
+
+> MAIL_PORT=465
+
+> MAIL_USERNAME=hello@example.com
+
+> MAIL_PASSWORD=null
+
+> MAIL_ENCRYPTION=ssl
+
+> MAIL_FROM_NAME="${APP_NAME}"
+
+**PUSHER**
+
+> PUSHER_APP_ID=
+
+> PUSHER_APP_KEY=
+
+> PUSHER_APP_SECRET=
+
+> PUSHER_HOST=
+
+> PUSHER_PORT=
+
+> PUSHER_SCHEME=https
+
+> PUSHER_APP_CLUSTER=
+
+#
+
+after setting up **.env** file, execute:
+
+```sh
+php artisan config:cache
+```
+
+in order to cache environment variables.
+
+5\. Now execute in the root of you project following:
+
+```sh
+php artisan key:generate
+```
+
+##### Now, you should be good to go!
+
+#
+
+### Migration
+
+if you've completed getting started section, then migrating database if fairly simple process, just execute:
+
+```sh
+php artisan migrate
+```
+
+#
+
+### Development
+
+You can run Laravel's built-in development server by executing:
+
+```sh
+php artisan serve
+```
+
+Build js files:
+
+```sh
+npm run dev
+```
+
+it will watch JS files and on change it'll rebuild them, so you don't have to manually build them.
+
+#
+
+### Resources
+
+Structure of database:
+
+<img src="/readme/assets/drawSQL.png" style="position:absolute; top:10px" height="250"/>
+
+#
