@@ -78,4 +78,5 @@ Route::group(["middleware"=>"auth:sanctum"], function () {
     Route::post('/notifications/clear', [NotificationController::class, 'clear']);
     Route::post('/notifications/{notification}', [NotificationController::class, 'view']);
     Route::get('/genres', [GenreController::class, 'view']);
+    Route::post('/logout', [UserController::class, 'logout']);
 });

@@ -25,7 +25,7 @@ class MovieController extends Controller
             'title' => $validatedData['title'],
             'banner' => $bannerPath,
             'release_year' => $validatedData['release_year'],
-            'genre' => json_encode($validatedData['genre']),
+            'genre' => $validatedData['genre'],
             'description' => $validatedData['description'],
             'director' => $validatedData['director'],
             'budget'=> $validatedData['budget'],
@@ -43,7 +43,7 @@ class MovieController extends Controller
             return response([], 200);
         }
     
-        return response($movies, 200);
+        return response($movies->load("quotes"), 200);
     }
     
 
