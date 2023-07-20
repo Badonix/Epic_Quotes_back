@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\EmailVerificationController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LoginController;
@@ -76,4 +77,6 @@ Route::group(["middleware"=>"auth:sanctum"], function () {
     Route::post('/profile', [UserController::class, 'update']);
     Route::post('/notifications/clear', [NotificationController::class, 'clear']);
     Route::post('/notifications/{notification}', [NotificationController::class, 'view']);
+    Route::get('/genres', [GenreController::class, 'view']);
+    Route::post('/logout', [UserController::class, 'logout']);
 });

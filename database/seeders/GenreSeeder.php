@@ -13,18 +13,17 @@ class GenreSeeder extends Seeder
     public function run(): void
     {
         $genres = [
-            'Action',
-            'Comedy',
-            'Drama',
-            'Thriller',
-            'Horror',
-            'Romance',
-            'Adventure',
-            'Sci-Fi',
-            'Fantasy',
-            'Mystery',
+            ["en"=>"Comedy", "ka"=>"კომედია"],
+            ["en"=>'Drama', "ka"=>"დრამა"],
+            ["en"=>'Thriller', "ka"=>"თრილერი"],
+            ["en"=>'Horror', "ka"=>"საშინელება"],
+            ["en"=>'Romance', "ka"=>"რომანტიკა"],
+            ["en"=>'Adventure', "ka"=>"სათავგადასავლო"],
+            ["en"=>'Sci-Fi', 'ka'=>"სამეცნიერო ფანტასტიკა"],
+            ["en"=>'Fantasy', 'ka'=>"ფანტასტიკა"],
+            ["en"=>'Mystery', "ka" =>"მისტიკა"],
         ];
-        
+
         foreach ($genres as $genre) {
             Genre::create(['name' => $genre]);
         }
