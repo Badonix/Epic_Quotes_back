@@ -32,10 +32,9 @@ class PasswordResetController extends Controller
         $user = Password::getUser(['email' => $email]);
         if (Password::tokenExists($user, $token)) {
             $resetRoute = '/reset-password/' . $token . "?email=" . $email;
-            $redirectTo = $spaDomain . $resetRoute;
-            return redirect($redirectTo);
+            return redirect()->to($spaDomain . $resetRoute);
         }
-        return redirect()->away($spaDomain . '/reset-password/expired');
+        return redirect()->to($spaDomain . '/reset-password/expired');
     }
 
     public function reset(PasswordResetRequest $request) {
