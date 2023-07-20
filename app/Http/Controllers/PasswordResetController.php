@@ -35,7 +35,7 @@ class PasswordResetController extends Controller
             $redirectTo = $spaDomain . $resetRoute;
             return redirect($redirectTo);
         }
-        return redirect($spaDomain . '/reset-password/expired');
+        return redirect()->away($spaDomain . '/reset-password/expired');
     }
 
     public function reset(PasswordResetRequest $request) {
