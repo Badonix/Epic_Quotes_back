@@ -39,7 +39,7 @@ This **Epic Movie Quotes** backend API is for social media app about movies and 
 1\. First of all you need to clone Epic Movie Quotes API repository from github:
 
 ```sh
-git clone https://github.com/RedberryInternshipnikoloz-danelia-epic-movie-quotes-back
+git clone https://github.com/Badonix/Epic_Quotes_back
 ```
 
 2\. Next step requires you to run _composer install_ in order to install all the dependencies.
